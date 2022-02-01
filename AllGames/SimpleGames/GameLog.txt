@@ -1,0 +1,7 @@
+[P1]-Scissors |vs| [AI]-Paper >COMPUTER wins!
+[P1]-Rock |vs| [AI]-Paper >COMPUTER wins!
+[P1]-Lizard |vs| [AI]-Scissors >COMPUTER wins!
+[P1]-Lizard |vs| [AI]-Paper >PLAYER wins!
+[P1]-Rock |vs| [AI]-Spock >COMPUTER wins!
+[P1]-Spock |vs| [AI]-Lizard >COMPUTER wins!
+[P1]-Lizard |vs| [AI]-Spock >PLAYER wins!
