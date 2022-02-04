@@ -4,8 +4,9 @@ class Video {
     private string $title;
     private ?float $rating;
     private bool $available;
+    private array $ratings = [];
 
-    public function __construct(string $title, bool $available = true, ?float $rating = null) {
+    public function __construct(string $title, bool $available = true, float $rating = null) {
         $this->title = $title;
         $this->rating = $rating;
         $this->available = $available;
@@ -24,9 +25,13 @@ class Video {
         return "Unavailable";
     }
 
-    public function getRating(): string {
-        if ($this->rating == null) return "N/A";
-        return $this->rating . '%';
+    public function calculateRating(): float {
+        return $this->rating = array_sum($this->ratings) / count($this->ratings);
+    }
+
+    public function printRating(): string {
+        if ($this->rating == 0) return "N/A";
+        return round($this->rating) . '%';
     }
 
     public function setAvailability(): bool {
@@ -38,7 +43,8 @@ class Video {
         return $this->available = true;
     }
 
-    public function rateVideo(): float {
-        return $this->rating = readline("Rate video (0%-100%): ");
+    public function rateVideo(): int {
+        $givenRating = readline("Rate video (0%-100%): ");
+        return $this->ratings[] = $givenRating;
     }
 }

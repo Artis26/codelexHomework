@@ -1,7 +1,6 @@
 <?php
 
 class VideoStore {
-    private Video $video;
     private array $inventory;
     private array $rentedVideos;
 
@@ -22,13 +21,11 @@ class VideoStore {
 
         foreach ($this->inventory as $one) {
             switch ($choice) {
-                case ($nr+=1):
-                $videoToRent = $one;
-                break;
+                case ($nr += 1):
+                    $videoToRent = $one;
+                    break;
             }
         }
-
-        var_dump($videoToRent);
 
         if (($key = array_search($videoToRent, $this->inventory)) !== false) {
             if ($this->inventory[$key]->isAvailable() == false) return "Unavailable";
@@ -39,12 +36,12 @@ class VideoStore {
         return "Such movie doesnt exist";
     }
 
-    public function returnVideo() {
+    public function returnVideo(): string {
         if (empty($this->rentedVideos) == true) return "Nothing to return.";
         $nr = 0;
         $i = 1;
         foreach ($this->rentedVideos as $one) {
-            echo "[$i]" . '"' . $one->getTitle() . '"';
+            echo "[$i]" . '"' . $one->getTitle() . '"' . PHP_EOL;
             $i++;
         }
 
@@ -52,7 +49,7 @@ class VideoStore {
 
         foreach ($this->rentedVideos as $oneR) {
             switch ($choice) {
-                case ($nr+=1):
+                case ($nr += 1):
                     $videoToReturn = $oneR;
                     break;
             }
@@ -62,6 +59,9 @@ class VideoStore {
             $this->rentedVideos[$key]->setAvailability();
             unset($this->rentedVideos[$key]);
         }
+
+        $this->rating = $videoToReturn->rateVideo();
+        $videoToReturn->calculateRating();
         return "You have returned " . $videoToReturn->getTitle();
     }
 
@@ -71,9 +71,9 @@ class VideoStore {
         $i = 1;
         foreach ($this->inventory as $one) {
             $result .= "[$i]" . '[ "' . $one->getTitle() . '" | ' . $one->getAvailability() . ' | ' .
-                $one->getRating() . ' ]' . PHP_EOL;
+                $one->printRating() . ' ]' . PHP_EOL;
             $i++;
         }
-        return $head . PHP_EOL .$result;
+        return $head . PHP_EOL . $result;
     }
 }

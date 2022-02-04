@@ -1,4 +1,5 @@
 <?php
+
 class Application {
 
     private VideoStore $videoStore;
